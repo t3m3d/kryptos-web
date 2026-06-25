@@ -17,11 +17,11 @@ x86 emulator.
    `devbar.png`, `tally.png`, `fixture.png`, `meridian.png`, `cutout.png`,
    `cortex-win.png`, `godmode.png` (~640×400, 16:10). They auto-appear on the
    Mac Apps / Windows Apps pages. (Until then a gradient placeholder shows.)
-2. **Store links** — when an app goes live, give me (or edit in `os.js`) the
-   **Mac App Store / Microsoft Store** URL. In `os.js` each app row is
-   `["Name", "desc", "shot.png", "STORE_URL"]` — fill the empty `""` with the URL
-   and its button flips from "Coming soon" to a real **paid** store link.
-   No direct downloads — buying always happens on the store.
+2. **Store links** — open `os.js`, find the **`STORE_LINKS`** block at the very top.
+   It lists every app by name with an empty `""`. Paste the **Mac App Store /
+   Microsoft Store** URL between the quotes for that app — done. The button flips
+   from "Coming soon" to a real **paid** store link automatically. That one block
+   is the only place to edit. (No direct downloads — buying happens on the store.)
 3. **Content review** — all page text lives inline in `os.js` (search the app id:
    `profile`, `projects`, `krypton`, `macapps`, `winapps`, `blog`, `contact`).
    Tell me edits, or change it directly: your bio, real project descriptions,

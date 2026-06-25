@@ -1,5 +1,21 @@
 "use strict";
 
+/* =======================================================================
+   STORE LINKS — paste each app's store URL here. Leave "" for "Coming soon".
+   This is the ONLY place you edit to make a buy button go live.
+   ======================================================================= */
+const STORE_LINKS = {
+  // --- Mac App Store ---
+  "DevBar": "", "Tally": "", "Fixture": "", "Meridian": "", "Cutout": "",
+  // --- Microsoft Store: apps ---
+  "Cortex": "",            // coming soon to the Microsoft Store
+  "God Mode Script": "",
+  // --- Microsoft Store: WSL distros ---
+  "Chimera Linux WSL": "", "Exherbo Linux WSL": "", "koyd": "", "krewsil": "",
+  "kryodev": "", "kryodome": "", "kryottos": "", "kryox": "", "kryptoo": "",
+  "krytix": "", "FedBase": "", "wsltoo": "",
+};
+
 /* ============================ Boot ============================ */
 const bootLines = [
   "[    0.000000] KryptOS 1.0 — Krypton Linux (kernel 6.9.1-krypton)",
@@ -378,6 +394,11 @@ Object.assign(apps, {
         ["kryodev", "Devuan-based WSL environment (Debian without systemd, apt).", "kryodevwsl.png", ""],
         ["kryodome", "Security / pentesting WSL based on BlackArch (Arch, pacman + BlackArch tools).", "kryodomewsl.png", ""],
         ["kryottos", "Security / pentesting WSL based on Parrot OS.", "kryottos.png", ""],
+        ["kryox", "Lightweight WSL based on antiX (Debian-based, no systemd).", "kryox.png", ""],
+        ["kryptoo", "Security / pentesting WSL based on Pentoo (Gentoo-based).", "kryptoo.png", ""],
+        ["krytix", "WSL based on Artix (Arch-based, no systemd — OpenRC / runit / s6).", "krytix.png", ""],
+        ["FedBase", "A Fedora-based Linux WSL installer (dnf package manager).", "fedbase.png", ""],
+        ["wsltoo", "A Gentoo-based spin for WSL2 (Portage / emerge).", "wsltoo.png", ""],
       ];
       const winApps = [
         ["Cortex", "WPF / .NET 8 file explorer — the Windows sibling of macOS Cortex.", "cortex-win.png", ""],
@@ -401,16 +422,19 @@ function storeBadge(kind) {
 }
 function storeCards(items, kind, dir) {
   const badge = storeBadge(kind);
-  return items.map(([name, desc, shot, url]) => `
+  return items.map(([name, desc, shot, url]) => {
+    const link = (STORE_LINKS[name] || url || "").trim();   // STORE_LINKS wins
+    return `
       <div class="appcard">
         <div class="shot" style="background-image:url('${dir}${shot}')"></div>
         <div class="appcard-body">
           <h3>${name}</h3><p>${desc}</p>
-          ${url
-            ? `<a class="store-btn ${kind}" href="${url}" target="_blank">${badge}</a>`
+          ${link
+            ? `<a class="store-btn ${kind}" href="${link}" target="_blank">${badge} &#8599;</a>`
             : `<span class="store-btn soon">${badge} · Coming soon</span>`}
         </div>
-      </div>`).join("");
+      </div>`;
+  }).join("");
 }
 function renderStore(c, title, kind, items, dir = "screenshots/") {
   c.innerHTML = `<div class="page"><h1>${title}</h1>
