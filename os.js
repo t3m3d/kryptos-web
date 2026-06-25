@@ -370,6 +370,7 @@ Object.assign(apps, {
   winapps: {
     id: "winapps", title: "Windows Apps", icon: "&#129744;", singleton: true, w: 720, h: 520,
     mount(c) { renderStore(c, "Windows Apps", "win", [
+      ["Chimera Linux WSL", "Chimera Linux packaged for WSL — a modern musl-based distro with BSD userland, one-click install on Windows.", "chimerawsl.png", ""],
       ["Cortex", "WPF / .NET 8 file explorer — the Windows sibling of macOS Cortex.", "cortex-win.png", ""],
       ["God Mode Script", "Windows power-user tweak / utility script.", "godmode.png", ""],
     ]); }
