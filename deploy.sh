@@ -2,13 +2,13 @@
 # deploy.sh — upload KryptOS Web to Hostinger via FTP.
 #
 # Fill these 4 in (or pass as env vars), then run:  bash deploy.sh
-# The subdomain (kryptos.krypton-lang.org) must already exist in hPanel.
+# The subdomain (dev.krypton-lang.org) must already exist in hPanel.
 set -e
 
-FTP_HOST="${FTP_HOST:-ftp.krypton-lang.org}"     # Hostinger FTP host (hPanel → FTP Accounts)
+FTP_HOST="${FTP_HOST:-88.223.85.17}"             # Hostinger FTP host (your account IP)
 FTP_USER="${FTP_USER:-}"                          # FTP username
 FTP_PASS="${FTP_PASS:-}"                          # FTP password
-FTP_DIR="${FTP_DIR:-/public_html/kryptos}"        # subdomain folder (from hPanel)
+FTP_DIR="${FTP_DIR:-/public_html/dev}"            # subdomain folder (from hPanel)
 
 [ -z "$FTP_USER" ] && { read -rp "FTP user: " FTP_USER; }
 [ -z "$FTP_PASS" ] && { read -rsp "FTP pass: " FTP_PASS; echo; }
@@ -33,4 +33,4 @@ else
   done <<< "$FILES"
 fi
 
-echo "Done. Visit https://kryptos.krypton-lang.org/"
+echo "Done. Visit https://dev.krypton-lang.org/"
