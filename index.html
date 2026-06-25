@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KryptOS — Krypton Linux in your browser</title>
+<link rel="stylesheet" href="vendor/xterm.css">
+<link rel="stylesheet" href="style.css?v=11">
+</head>
+<body>
+
+<!-- Boot screen -->
+<div id="boot">
+  <div class="boot-logo">&#11041;</div>
+  <div class="boot-name">KryptOS</div>
+  <div class="boot-tag">KRYPTON LINUX</div>
+  <pre id="boot-log"></pre>
+  <div class="boot-bar"><div id="boot-fill"></div></div>
+</div>
+
+<!-- Desktop -->
+<div id="desktop" class="hidden">
+  <!-- GNOME top bar -->
+  <div id="topbar">
+    <button id="activities">Activities</button>
+    <div id="appname">GNOME</div>
+    <button id="clock">--:--</button>
+    <div id="tray">
+      <span class="ico" title="Network">&#9683;</span>
+      <span class="ico" title="Sound">&#9834;</span>
+      <span class="ico" title="Battery">&#9211;</span>
+      <span id="powerbtn" class="ico" title="Power">&#9211;</span>
+    </div>
+  </div>
+
+  <!-- Window layer -->
+  <div id="windows"></div>
+
+  <!-- Activities overview -->
+  <div id="overview" class="hidden">
+    <div id="overview-windows"></div>
+    <div id="appgrid"></div>
+  </div>
+
+  <!-- GNOME dock -->
+  <div id="dock"></div>
+</div>
+
+<script src="vendor/xterm.js"></script>
+<script src="v86/libv86.js"></script>
+<script src="os.js?v=11"></script>
+</body>
+</html>

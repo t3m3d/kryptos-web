@@ -1,0 +1,10 @@
+# Serve WASM with the correct type so v86 loads
+AddType application/wasm .wasm
+
+# NOTE: COOP/COEP are intentionally NOT set — the Arch rootfs is lazy-loaded
+# cross-origin from copy.sh's CDN, which COEP=require-corp would block.
+
+# Cache the big static engine/image files
+<FilesMatch "\.(wasm|iso|bin|js|css)$">
+  Header set Cache-Control "public, max-age=604800"
+</FilesMatch>
