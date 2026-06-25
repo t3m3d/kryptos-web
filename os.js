@@ -369,30 +369,52 @@ Object.assign(apps, {
   },
   winapps: {
     id: "winapps", title: "Windows Apps", icon: "&#129744;", singleton: true, w: 720, h: 520,
-    mount(c) { renderStore(c, "Windows Apps", "win", [
-      ["Chimera Linux WSL", "Chimera Linux packaged for WSL — a modern musl-based distro with BSD userland, one-click install on Windows.", "chimerawsl.png", ""],
-      ["Cortex", "WPF / .NET 8 file explorer — the Windows sibling of macOS Cortex.", "cortex-win.png", ""],
-      ["God Mode Script", "Windows power-user tweak / utility script.", "godmode.png", ""],
-    ]); }
+    mount(c) {
+      const wsl = [
+        ["Chimera Linux WSL", "Chimera Linux for WSL — a modern musl-based distro with BSD userland.", "chimerawsl.png", ""],
+        ["Exherbo Linux WSL", "Exherbo Linux for WSL — a source-based, power-user distro.", "exherbowsl.png", ""],
+        ["koyd", "Unofficial Void Linux–based WSL environment (xbps).", "koydwsl.png", ""],
+        ["krewsil", "Alpine Linux–based WSL environment (apk).", "krewsilwsl.png", ""],
+        ["kryodev", "Devuan-based WSL environment (Debian without systemd, apt).", "kryodevwsl.png", ""],
+        ["kryodome", "Security / pentesting WSL based on BlackArch (Arch, pacman + BlackArch tools).", "kryodomewsl.png", ""],
+        ["kryottos", "Security / pentesting WSL based on Parrot OS.", "kryottos.png", ""],
+      ];
+      const winApps = [
+        ["Cortex", "WPF / .NET 8 file explorer — the Windows sibling of macOS Cortex.", "cortex-win.png", ""],
+        ["God Mode Script", "Windows power-user tweak / utility script.", "godmode.png", ""],
+      ];
+      c.innerHTML = `<div class="page"><h1>Windows Apps</h1>
+        <h2 class="sec">WSL Distros</h2>
+        ${storeCards(wsl, "win", "screenshots/wsl/")}
+        <h2 class="sec">Apps</h2>
+        ${storeCards(winApps, "win", "screenshots/")}
+        <p class="muted">Paid downloads via the Microsoft Store — this site only links out.</p></div>`;
+    }
   },
 });
 
-/** Render an app store page: screenshot + paid store button per app. */
-function renderStore(c, title, kind, items) {
-  const badge = kind === "mac"
+/** App-store cards: screenshot + paid store button per app. `dir` = screenshot folder. */
+function storeBadge(kind) {
+  return kind === "mac"
     ? `<span class="store-logo">&#63743;</span> Mac App Store`
     : `<span class="store-logo">&#9638;</span> Microsoft Store`;
-  c.innerHTML = `<div class="page"><h1>${title}</h1>
-    ${items.map(([name, desc, shot, url]) => `
+}
+function storeCards(items, kind, dir) {
+  const badge = storeBadge(kind);
+  return items.map(([name, desc, shot, url]) => `
       <div class="appcard">
-        <div class="shot" style="background-image:url('screenshots/${shot}')"></div>
+        <div class="shot" style="background-image:url('${dir}${shot}')"></div>
         <div class="appcard-body">
           <h3>${name}</h3><p>${desc}</p>
           ${url
             ? `<a class="store-btn ${kind}" href="${url}" target="_blank">${badge}</a>`
             : `<span class="store-btn soon">${badge} · Coming soon</span>`}
         </div>
-      </div>`).join("")}
+      </div>`).join("");
+}
+function renderStore(c, title, kind, items, dir = "screenshots/") {
+  c.innerHTML = `<div class="page"><h1>${title}</h1>
+    ${storeCards(items, kind, dir)}
     <p class="muted">Paid downloads are handled by the ${kind === "mac" ? "Mac App Store" : "Microsoft Store"} —
       this site only links out.</p></div>`;
 }
