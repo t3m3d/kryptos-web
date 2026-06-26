@@ -154,8 +154,8 @@ function mountSimShell(container) {
     }
   });
 
-  wl(`${C.c}${C.bold}KryptOS${C.reset} (Krypton Linux) — simulated shell with ${C.bold}pacman${C.reset}.`);
-  wl(`${C.dim}Try:  pacman -S neofetch   then   neofetch   ·   pacman -Ss editor   ·   help${C.reset}`);
+  neofetch();
+  wl(`${C.dim}simulated shell with a working pacman · try: pacman -S vim · pacman -Ss editor · help${C.reset}`);
   wl("");
   prompt();
 }
