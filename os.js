@@ -198,6 +198,11 @@ const apps = {
     }
   },
 
+  arch: {
+    id: "arch", title: "Arch Terminal (pacman)", icon: "&#128230;", singleton: true, w: 820, h: 520,
+    mount(c) { mountSimShell(c); }
+  },
+
   // ---- launchers: run a real Linux command in the terminal ----
   monitor: { id: "monitor", title: "System Monitor", icon: "&#128202;", runCmd: "top" },
   diskuse: { id: "diskuse", title: "Disk Usage", icon: "&#128190;", runCmd: "df -h" },
@@ -450,7 +455,7 @@ function makeEditor(name) {
 }
 
 /* ============================ Dock ============================ */
-const dockApps = ["profile", "projects", "krypton", "macapps", "winapps", "blog", "contact", "terminal", "files"];
+const dockApps = ["profile", "projects", "krypton", "macapps", "winapps", "blog", "contact", "terminal", "arch", "files"];
 function buildDock() {
   const dock = document.getElementById("dock");
   dock.innerHTML = "";
